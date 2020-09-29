@@ -3,5 +3,5 @@ a common web development technique known as “pagination” to enhance the usab
 
 ### [link to live view](https://indaqoo.github.io/fullstack-unit-2/)
 
-### Languages used:
+### Languages used: 
 - Javascript
