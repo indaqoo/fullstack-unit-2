@@ -8,7 +8,7 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "gh-pages -d public"
+    "deploy": "gh-pages -d public"
   },
   "author": "Roberts Peirags",
   "license": "MIT",
