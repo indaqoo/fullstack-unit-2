@@ -70,29 +70,17 @@ function addSearch(list) {
     let searchResult = [];
     const searchValue = search.value;
 
-    if (searchValue.length === 0) {
-      showPage(list, 1);
-      addPagination(list);
-   } else {
-
-      for (let i = 0; i < list.length; i++) {
-         let student = list[i];
-         let fullName = `${student.name.first} ${student.name.last}`;
-         if (fullName.toLowerCase().includes(searchValue.toLowerCase())) {
-            searchResult.push(student);
-         };
+    for (let i = 0; i < list.length; i++) {
+      let student = list[i];
+      let fullName = `${student.name.first} ${student.name.last}`;
+      if (fullName.toLowerCase().includes(searchValue.toLowerCase())) {
+         searchResult.push(student);
       };
-
-      // If no results are found, then display message
-      if (searchResult.length === 0) {
-         showPage([], 1);
-         addPagination([]);
-      };
-
-      // Call functions based on searchResults
-      showPage(searchResult, 1);
-      addPagination(searchResult);
    };
+
+   showPage(searchResult, 1);
+   addPagination(searchResult);
+  
   });
 
 
