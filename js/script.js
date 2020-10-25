@@ -55,5 +55,49 @@ function addPagination(list) {
 };
 
 
+function addSearch(list) {
+  const header = document.querySelector('.header');
+  header.insertAdjacentHTML('beforeend', `
+  <label for="search" class="student-search">
+    <input id="search" placeholder="Search by name...">
+    <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+  </label>
+  `)
+
+  const search = document.getElementById('search');
+
+  search.addEventListener('keyup', () => {
+    let searchResult = [];
+    const searchValue = search.value;
+
+    if (searchValue.length === 0) {
+      showPage(list, 1);
+      addPagination(list);
+   } else {
+
+      for (let i = 0; i < list.length; i++) {
+         let student = list[i];
+         let fullName = `${student.name.first} ${student.name.last}`;
+         if (fullName.toLowerCase().includes(searchValue.toLowerCase())) {
+            searchResult.push(student);
+         };
+      };
+
+      // If no results are found, then display message
+      if (searchResult.length === 0) {
+         showPage([], 1);
+         addPagination([]);
+      };
+
+      // Call functions based on searchResults
+      showPage(searchResult, 1);
+      addPagination(searchResult);
+   };
+  });
+
+
+}
+
 showPage(data, 1);
 addPagination(data);
+addSearch(data);
