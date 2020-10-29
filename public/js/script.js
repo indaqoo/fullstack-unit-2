@@ -43,9 +43,11 @@ function addPagination(list) {
     const page = button.textContent;
 
     if (button.nodeName === "BUTTON" ) {
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove('active');
-      }
+      
+      buttons.forEach(function(button){
+        button.classList.remove('active');
+      });
+      
       button.classList.add("active");
       showPage(list, page);
     }
@@ -63,23 +65,21 @@ function addSearch(list) {
     <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
   </label>
   `)
-
   const search = document.getElementById('search');
 
   search.addEventListener('keyup', () => {
-    let searchResult = [];
     const searchValue = search.value;
-
-    for (let i = 0; i < list.length; i++) {
-      let student = list[i];
+    
+    const searchResult = list.filter( list => {
+      let student = list;
       let fullName = `${student.name.first} ${student.name.last}`;
-      if (fullName.toLowerCase().includes(searchValue.toLowerCase())) {
-         searchResult.push(student);
-      };
-   };
-
-   showPage(searchResult, 1);
-   addPagination(searchResult);
+       if (fullName.toLowerCase().includes(searchValue.toLowerCase())) {
+        return student;
+       }
+     });
+   
+     showPage(searchResult, 1);
+     addPagination(searchResult);
   
   });
 
@@ -89,3 +89,5 @@ function addSearch(list) {
 showPage(data, 1);
 addPagination(data);
 addSearch(data);
+
+
