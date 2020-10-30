@@ -208,3 +208,17 @@ header h2 {
 		box-shadow: 0 4px 16px 0 rgba(22, 42, 90, 0.09);
 	}
 }
+
+/* 
+    custom css 
+*/
+
+
+.error {
+  width: 100%;
+  padding: 15px;
+  background-color: rgb(255, 121, 121);
+  border: 3px solid rgb(215, 121, 121);
+  color: white;
+  border-radius: 5px;
+}

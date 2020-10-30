@@ -43,9 +43,11 @@ function addPagination(list) {
     const page = button.textContent;
 
     if (button.nodeName === "BUTTON" ) {
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove('active');
-      }
+
+      buttons.forEach(function(button){
+        button.classList.remove('active');
+      });
+
       button.classList.add("active");
       showPage(list, page);
     }
@@ -63,26 +65,29 @@ function addSearch(list) {
     <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
   </label>
   `)
-
   const search = document.getElementById('search');
+  const searchButton = document.querySelector(`[type="button"]`);
 
   search.addEventListener('keyup', () => {
-    let searchResult = [];
-    const searchValue = search.value;
+    const searchValue = search.value.toLowerCase();
 
-    for (let i = 0; i < list.length; i++) {
-      let student = list[i];
-      let fullName = `${student.name.first} ${student.name.last}`;
-      if (fullName.toLowerCase().includes(searchValue.toLowerCase())) {
-         searchResult.push(student);
+    const searchResult = list.filter( list => {
+      let fullName = `${list.name.first} ${list.name.last}`;
+      if (fullName.toLowerCase().includes(searchValue)) {
+        return list;
       };
-   };
+    });
 
-   showPage(searchResult, 1);
-   addPagination(searchResult);
-  
+    if (searchResult.length === 0) {
+      const html = `<div class="error"><h3>Sorry, No match was fond :(</h3></div>`;
+      document.querySelector('.link-list').innerHTML = html;
+      document.querySelector('.student-list').innerHTML = "";;
+    } else {
+      showPage(searchResult, 1);
+      addPagination(searchResult);
+    };
+
   });
-
 
 }
 
